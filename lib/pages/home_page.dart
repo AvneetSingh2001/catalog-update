@@ -82,9 +82,32 @@ class CatalogItem extends StatelessWidget {
     return VxBox(
         child: Row(
       children: [
-        Image.network(catalog.image),
+        CatalogImage(image: catalog.image),
+        Row(
+          children: [
+            catalog.name.text.lg.make(),
+            catalog.desc.text.textStyle(TextStyle()).make(),
+          ],
+        )
       ],
-    )).white.square(100).make();
+    )).white.rounded.square(150).make().py8();
+  }
+}
+
+class CatalogImage extends StatelessWidget {
+  final String image;
+  const CatalogImage({Key? key, required this.image}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(image)
+        .box
+        .rounded
+        .p8
+        .color(MyTheme.creamColor)
+        .make()
+        .p16()
+        .w40(context);
   }
 }
 
