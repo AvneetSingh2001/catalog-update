@@ -1,4 +1,5 @@
 import 'package:catalog_revision/models/catalog.dart';
+import 'package:catalog_revision/widgets/theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeDetailPage extends StatelessWidget {
@@ -8,10 +9,18 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          child: Column(
-        children: [Image.network(catalog.image)],
-      )),
+      appBar: AppBar(),
+      backgroundColor: MyTheme.creamColor,
+      body: SafeArea(
+        child: Container(
+            child: Column(
+          children: [
+            Hero(
+                tag: Key(catalog.id.toString()),
+                child: Image.network(catalog.image)),
+          ],
+        )),
+      ),
     );
   }
 }
