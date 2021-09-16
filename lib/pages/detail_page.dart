@@ -10,19 +10,17 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyTheme.creamColor,
-      ),
+      appBar: AppBar(backgroundColor: Colors.transparent),
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           children: [
             "\$${catalog.price}".text.bold.xl3.red800.make(),
             ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(MyTheme.darkBluishColor),
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).buttonColor),
                         shape: MaterialStateProperty.all(StadiumBorder())),
                     onPressed: () {},
                     child: "Buy".text.make())
@@ -30,7 +28,7 @@ class HomeDetailPage extends StatelessWidget {
           ],
         ).p32(),
       ),
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
         bottom: false,
         child: Container(
@@ -49,17 +47,21 @@ class HomeDetailPage extends StatelessWidget {
                 edge: VxEdge.TOP,
                 child: Container(
                   width: context.screenWidth,
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   child: Column(
                     children: [
                       catalog.name.text.bold
-                          .color(MyTheme.darkBluishColor)
+                          .color(Theme.of(context).accentColor)
                           .xl4
                           .make(),
-                      catalog.desc.text.xl.caption(context).make(),
+                      catalog.desc.text.xl
+                          .caption(context)
+                          .color(Theme.of(context).accentColor)
+                          .make(),
                       10.heightBox,
                       "Amet vero dolor sed elitr tempor clita et et, vero dolores est voluptua at. Elitr vero takimata gubergren dolores amet.Sadipscing lorem no elitr dolore kasd dolore elitr. Sit sanctus sit stet sit dolore lorem clita clita. Sadipscing sed sed no invidunt. Diam consetetur clita tempor kasd amet no voluptua sanctus. Sit rebum magna elitr vero sit lorem magna. Dolor voluptua elitr duo sanctus tempor elitr amet, diam diam consetetur."
                           .text
+                          .color(Theme.of(context).accentColor)
                           .caption(context)
                           .make()
                           .p16()
