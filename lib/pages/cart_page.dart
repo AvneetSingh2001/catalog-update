@@ -37,6 +37,7 @@ class _cartTotal extends StatelessWidget {
     return Container(
       height: 200,
       child: Row(
+        
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           "\$9999".text.xl5.bold.color(Theme.of(context).accentColor).make(),
@@ -46,8 +47,8 @@ class _cartTotal extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all(
                           Theme.of(context).buttonColor)),
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: "Buying not supported".text.make()));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: "Buying not supported yet".text.make()));
                   },
                   child: "Buy".text.make())
               .w32(context)
