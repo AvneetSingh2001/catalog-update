@@ -1,6 +1,6 @@
 import 'package:catalog_revision/models/catalog.dart';
 
-class cart {
+class CartModel {
   late CatalogModel _catalog;
 
   CatalogModel get catalog => _catalog;
