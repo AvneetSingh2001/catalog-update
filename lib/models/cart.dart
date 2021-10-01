@@ -13,10 +13,6 @@ class CartModel {
 
   final List<int> _itemIds = [];
 
-  void remove(Item item) {
-    _itemIds.remove(item.id);
-  }
-
   List<Item> get items =>
       _itemIds.map((id) => _catalog.getItemById(id)).toList();
 
@@ -30,5 +26,14 @@ class AddMutation extends VxMutation<MyStore> {
   @override
   perform() {
     store!.cartModel._itemIds.add(item.id);
+  }
+}
+
+class RemoveMutation extends VxMutation<MyStore> {
+  final Item item;
+  RemoveMutation(this.item);
+  @override
+  perform() {
+    store!.cartModel._itemIds.remove(item.id);
   }
 }
