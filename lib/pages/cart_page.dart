@@ -1,3 +1,4 @@
+import 'package:catalog_revision/core/my_store.dart';
 import 'package:catalog_revision/models/cart.dart';
 import 'package:catalog_revision/widgets/theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,7 @@ class _cartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    final CartModel _cart = (VxState.store as MyStore).cartModel;
     return Container(
       height: 200,
       child: Row(
@@ -64,27 +65,25 @@ class _cartTotal extends StatelessWidget {
   }
 }
 
-class _cartList extends StatefulWidget {
-  const _cartList({Key? key}) : super(key: key);
-
-  @override
-  _cartListState createState() => _cartListState();
-}
-
-class _cartListState extends State<_cartList> {
-  final _cart = CartModel();
+class _cartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: Icon(Icons.done),
-          trailing: IconButton(
-              onPressed: () {}, icon: Icon(Icons.remove_circle_outline)),
-          title: _cart.items[index].name.text.make(),
-        );
-      },
-      itemCount: _cart.items.length,
-    );
+    final CartModel _cart = (VxState.store as MyStore).cartModel;
+    return _cart.items.isEmpty
+        ? "Nothing to show".text.makeCentered()
+        : ListView.builder(
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(Icons.done),
+                trailing: IconButton(
+                    onPressed: () {
+                      _cart.remove(_cart.items[index]);
+                    },
+                    icon: Icon(Icons.remove_circle_outline)),
+                title: _cart.items[index].name.text.make(),
+              );
+            },
+            itemCount: _cart.items.length,
+          );
   }
 }

@@ -1,12 +1,8 @@
+import 'package:catalog_revision/core/my_store.dart';
 import 'package:catalog_revision/models/catalog.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CartModel {
-  static final cartModel = CartModel._internal();
-
-  CartModel._internal();
-
-  factory CartModel() => cartModel;
-
   late CatalogModel _catalog;
 
   CatalogModel get catalog => _catalog;
@@ -17,10 +13,6 @@ class CartModel {
 
   final List<int> _itemIds = [];
 
-  void add(Item item) {
-    _itemIds.add(item.id);
-  }
-
   void remove(Item item) {
     _itemIds.remove(item.id);
   }
@@ -30,4 +22,13 @@ class CartModel {
 
   int get totalPrice =>
       items.fold(0, (previousValue, element) => previousValue + element.price);
+}
+
+class AddMutation extends VxMutation<MyStore> {
+  final Item item;
+  AddMutation(this.item);
+  @override
+  perform() {
+    store!.cartModel._itemIds.add(item.id);
+  }
 }
